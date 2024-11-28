@@ -46,7 +46,7 @@
                         ctx.drawImage(imageObj, 0, 0, 680, 680);
 
                         // If Santa hat is checked, draw the hat (similar to the coat)
-                        if (is_santa_hat) {
+                        if (is_santa_hat && !is_santa_coat) {
                             var santaHatImage = new Image();
                             santaHatImage.src = santa_hat_base64_image;
                             santaHatImage.crossOrigin = "Anonymous";
@@ -59,7 +59,7 @@
                         }
 
                         // If Santa coat is checked, draw the coat
-                        if (is_santa_coat) {
+                        if (is_santa_coat && !is_santa_hat) {
                             var santaCoatImage = new Image();
                             santaCoatImage.src = santa_coat_base64_image;
                             santaCoatImage.crossOrigin = "Anonymous";
@@ -71,10 +71,32 @@
                             };
                         }
 
+                        if (is_santa_coat && is_santa_hat) {
+                            var santaCoatImage = new Image();
+                            santaCoatImage.src = santa_coat_base64_image;
+                            santaCoatImage.crossOrigin = "Anonymous";
+                            santaCoatImage.onload = function() {
+                                // Draw the Santa coat on top of the base image
+                                ctx.drawImage(santaCoatImage, 0, 0, 680, 680);
+
+                                var santaHatImage = new Image();
+                                santaHatImage.src = santa_hat_base64_image;
+                                santaHatImage.crossOrigin = "Anonymous";
+                                santaHatImage.onload = function() {
+                                    // Draw the Santa hat on top of the base image
+                                    ctx.drawImage(santaHatImage, 0, 0, 680, 680);
+                                    // Update the <img> tag to show the canvas image
+                                    updateImageFromCanvas();
+                                };
+                            };
+                        }
+
                         // If no Santa items are checked, just update the <img> tag with the base URL image
                         if (!is_santa_coat && !is_santa_hat) {
                             updateImageFromCanvas();
                         }
+
+                        updateImageFromCanvas();
                     };
                 }
 

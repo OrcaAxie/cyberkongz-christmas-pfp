@@ -11,6 +11,8 @@
             <label for="santa_coat">Santa Coat</label><br/>
             <input type="checkbox" id="santa_hat" />
             <label for="santa_hat">Santa Hat</label><br/>
+            <input type="checkbox" id="suit" />
+            <label for="suit">Suit</label><br/>
             <div>
                 <img id="image" style="width: 680px;height: 680px;" src="https://cyberkongz.fra1.cdn.digitaloceanspaces.com/site/assets/images/genesis/810.png" />
                 <canvas id="myCanvas" width="680" height="680" style="display:none;"></canvas>
@@ -19,9 +21,10 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>
             $(document).ready(function(){
-                const santa_coat_base64_image = "data:image/png;base64,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";
-                const santa_hat_base64_image = "data:image/png;base64,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";
-        
+                const santa_coat_image = "Santa_Coat.png";
+                const santa_hat_image = "Santa_Hat.png";
+                const suit_image = "Kongz-Suit.png";
+
                 function drawImage() {
                     var id = $('#id').val();
                     var url = "https://cyberkongz.fra1.cdn.digitaloceanspaces.com/site/assets/images/";
@@ -34,6 +37,7 @@
 
                     var is_santa_coat = $('#santa_coat').is(':checked');
                     var is_santa_hat = $('#santa_hat').is(':checked');
+                    var is_suit = $('#suit').is(':checked');
 
                     var c = document.getElementById("myCanvas");
                     var ctx = c.getContext("2d");
@@ -45,59 +49,35 @@
                         // Draw the base image (URL image) on the canvas
                         ctx.drawImage(imageObj, 0, 0, 680, 680);
 
-                        // If Santa hat is checked, draw the hat (similar to the coat)
-                        if (is_santa_hat && !is_santa_coat) {
-                            var santaHatImage = new Image();
-                            santaHatImage.src = santa_hat_base64_image;
-                            santaHatImage.crossOrigin = "Anonymous";
-                            santaHatImage.onload = function() {
-                                // Draw the Santa hat on top of the base image
-                                ctx.drawImage(santaHatImage, 0, 0, 680, 680);
-                                // Update the <img> tag to show the canvas image
+                        // Function to load and draw an image
+                        function drawImage(src) {
+                            var img = new Image();
+                            img.src = src;
+                            img.crossOrigin = "Anonymous";
+                            img.onload = function() {
+                                ctx.drawImage(img, 0, 0, 680, 680);
                                 updateImageFromCanvas();
                             };
                         }
 
-                        // If Santa coat is checked, draw the coat
-                        if (is_santa_coat && !is_santa_hat) {
-                            var santaCoatImage = new Image();
-                            santaCoatImage.src = santa_coat_base64_image;
-                            santaCoatImage.crossOrigin = "Anonymous";
-                            santaCoatImage.onload = function() {
-                                // Draw the Santa coat on top of the base image
-                                ctx.drawImage(santaCoatImage, 0, 0, 680, 680);
-                                // Update the <img> tag to show the canvas image
-                                updateImageFromCanvas();
-                            };
+                        if (is_santa_coat) {
+                            drawImage(santa_coat_image);
                         }
 
-                        if (is_santa_coat && is_santa_hat) {
-                            var santaCoatImage = new Image();
-                            santaCoatImage.src = santa_coat_base64_image;
-                            santaCoatImage.crossOrigin = "Anonymous";
-                            santaCoatImage.onload = function() {
-                                // Draw the Santa coat on top of the base image
-                                ctx.drawImage(santaCoatImage, 0, 0, 680, 680);
+                        if (is_suit) {
+                            drawImage(suit_image);
+                        }
 
-                                var santaHatImage = new Image();
-                                santaHatImage.src = santa_hat_base64_image;
-                                santaHatImage.crossOrigin = "Anonymous";
-                                santaHatImage.onload = function() {
-                                    // Draw the Santa hat on top of the base image
-                                    ctx.drawImage(santaHatImage, 0, 0, 680, 680);
-                                    // Update the <img> tag to show the canvas image
-                                    updateImageFromCanvas();
-                                };
-                            };
+                        if (is_santa_hat) {
+                            drawImage(santa_hat_image);
                         }
 
                         // If no Santa items are checked, just update the <img> tag with the base URL image
                         if (!is_santa_coat && !is_santa_hat) {
                             updateImageFromCanvas();
                         }
-
-                        updateImageFromCanvas();
                     };
+
                 }
 
                 function updateImageFromCanvas() {
@@ -114,11 +94,7 @@
                     drawImage();
                 });
 
-                $('#santa_coat').change(function(){
-                    drawImage();
-                });
-
-                $('#santa_hat').change(function(){
+                $('input[type="checkbox"]').change(function(){
                     drawImage();
                 });
 

@@ -49,33 +49,48 @@
                         // Draw the base image (URL image) on the canvas
                         ctx.drawImage(imageObj, 0, 0, 680, 680);
 
-                        // Function to load and draw an image
-                        function drawImage(src) {
+                        // Function to load and draw an image with a callback to ensure order
+                        function drawImage(src, callback) {
                             var img = new Image();
                             img.src = src;
                             img.crossOrigin = "Anonymous";
                             img.onload = function() {
                                 ctx.drawImage(img, 0, 0, 680, 680);
-                                updateImageFromCanvas();
+                                callback();
                             };
                         }
 
-                        if (is_santa_coat) {
-                            drawImage(santa_coat_image);
+                        // Draw the Santa coat first if checked
+                        function drawCoat() {
+                            if (is_santa_coat) {
+                                drawImage(santa_coat_image, drawSuit);
+                            } else {
+                                drawSuit();
+                            }
                         }
 
-                        if (is_suit) {
-                            drawImage(suit_image);
+                        // Draw the suit second if checked
+                        function drawSuit() {
+                            if (is_suit) {
+                                drawImage(suit_image, drawHat);
+                            } else {
+                                drawHat();
+                            }
                         }
 
-                        if (is_santa_hat) {
-                            drawImage(santa_hat_image);
+                        // Draw the Santa hat last if checked
+                        function drawHat() {
+                            if (is_santa_hat) {
+                                drawImage(santa_hat_image, updateImageFromCanvas);
+                            } else {
+                                updateImageFromCanvas();
+                            }
                         }
 
-                        if (!is_santa_coat && !is_santa_hat && !is_suit) {
-                            updateImageFromCanvas();
-                        }
+                        // Start the drawing process
+                        drawCoat();
                     };
+
 
                 }
 

@@ -7,10 +7,10 @@
         <div>
             <span>ID:</span><input type="number" id="id" value="810" /><button id="btn">Refresh Image</button><button id="download">Download Image</button><br/>
             <br/>
-            <input type="checkbox" id="santa_coat" />
-            <label for="santa_coat">Santa Coat</label><br/>
             <input type="checkbox" id="santa_hat" />
             <label for="santa_hat">Santa Hat</label><br/>
+            <input type="checkbox" id="santa_coat" />
+            <label for="santa_coat">Santa Coat</label><br/>
             <input type="checkbox" id="suit" />
             <label for="suit">Suit</label><br/>
             <div>
@@ -72,8 +72,7 @@
                             drawImage(santa_hat_image);
                         }
 
-                        // If no Santa items are checked, just update the <img> tag with the base URL image
-                        if (!is_santa_coat && !is_santa_hat) {
+                        if (!is_santa_coat && !is_santa_hat && !is_suit) {
                             updateImageFromCanvas();
                         }
                     };

@@ -13,6 +13,8 @@
             <label for="santa_coat">Santa Coat</label><br/>
             <input type="checkbox" id="suit" />
             <label for="suit">Suit</label><br/>
+            <input type="checkbox" id="rainbow_glass" />
+            <label for="rainbow_glass">Rainbow Glass</label><br/>
             <div>
                 <img id="image" style="width: 680px;height: 680px;" src="https://cyberkongz.fra1.cdn.digitaloceanspaces.com/site/assets/images/genesis/810.png" />
                 <canvas id="myCanvas" width="680" height="680" style="display:none;"></canvas>
@@ -24,6 +26,7 @@
                 const santa_coat_image = "Santa_Coat.png";
                 const santa_hat_image = "Santa_Hat.png";
                 const suit_image = "Kongz-Suit.png";
+                const rainbow_glass_image = "rainbow_glass.png";
 
                 function drawImage() {
                     var id = $('#id').val();
@@ -38,6 +41,7 @@
                     var is_santa_coat = $('#santa_coat').is(':checked');
                     var is_santa_hat = $('#santa_hat').is(':checked');
                     var is_suit = $('#suit').is(':checked');
+                    var is_rainbow_glass = $("#rainbow_glass").is(':checked');
 
                     var c = document.getElementById("myCanvas");
                     var ctx = c.getContext("2d");
@@ -81,7 +85,15 @@
                         // Draw the Santa hat last if checked
                         function drawHat() {
                             if (is_santa_hat) {
-                                drawImage(santa_hat_image, updateImageFromCanvas);
+                                drawImage(santa_hat_image, drawRainbowGlass);
+                            } else {
+                                drawRainbowGlass();
+                            }
+                        }
+
+                        function drawRainbowGlass() {
+                            if (is_rainbow_glass) {
+                                drawImage(rainbow_glass_image, updateImageFromCanvas);
                             } else {
                                 updateImageFromCanvas();
                             }
